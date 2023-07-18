@@ -52,6 +52,22 @@ public class MemberController {
     }
   }
 
+  @GetMapping("/update/{member_id}")  // detail/1
+  public String updateView(@PathVariable("member_id") Long member_id,
+                       Model model) {
+
+    MemberDto member = memberService.memberDetail(member_id);
+
+    if (member != null) {
+      model.addAttribute("member", member);
+      return "member/memberUpdate";
+    } else {
+      // 조회 회원이 없다.
+      return "redirect:member/memberList";
+    }
+  }
+
+
   // 회원수정  // id,name,email,phone
   @PostMapping("/update")
   public String updateOk(@ModelAttribute MemberDto memberDto) {
@@ -116,7 +132,7 @@ public class MemberController {
       System.out.println("회원삭제 성공");
     }
 
-    return "redirect:member/memberList";
+    return "redirect:/member/memberList";
   }
 
 
