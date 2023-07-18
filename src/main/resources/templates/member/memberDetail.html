@@ -10,26 +10,23 @@
 <div class="container">
   <div class="memberList">
     <div class="memberList-con">
-      <h1 class="title">회원목록</h1>
-      <table >
+      <h1 class="title"><span th:text="${member.name}" ></span>님 회원상세보기</h1>
+      <table>
         <tr>
           <th>ID</th>
           <th>NAME</th>
           <th>PHONE</th>
           <th>EMAIL</th>
           <th>DATE</th>
-          <th>상세조회</th>
+          <th>삭제</th>
         </tr>
-        <tr th:each="member : ${memberList}">
+        <tr >
           <td th:text="${member.id}">Onions</td>
           <td th:text="${member.name}">Onions</td>
           <td th:text="${member.phone}">Onions</td>
           <td th:text="${member.email}">Onions</td>
           <td th:text="${member.createDateTime}">Onions</td>
-                            <!-- /detail?member_id=값 -->
-<!--         <td ><a th:href="@{/detail(member_id=${member.id})}">조회 </a></td>-->
-                              <!-- /detail/{member_id}  -->
-          <td ><a th:href="@{/member/detail/{member_id}(member_id=${member.id})}">조회 </a></td>
+          <td ><a th:href="@{/member/delete/{member_id}(member_id=${member.id})}">삭제 </a></td>
         </tr>
       </table>
     </div>

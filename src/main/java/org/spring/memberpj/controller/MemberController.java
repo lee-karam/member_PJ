@@ -44,11 +44,11 @@ public class MemberController {
 
     if (rs != 1) {
       System.out.println("회원가입 실패");
-      return "redirect:member/index";
+      return "redirect:/member/index";
     } else {
       System.out.println("회원가입 성공");
       // 회원목록페이지로 이동
-      return "redirect:member/memberList";
+      return "redirect:/member/memberList";
     }
   }
 
@@ -68,15 +68,21 @@ public class MemberController {
 
   }
 
+
+/*  @GetMapping("/detail")  // detail/1
+  public String detail(@RequestParam("member_id") Long member_id,*/
+
   // 회원상세 보기
   @GetMapping("/detail/{member_id}")  // detail/1
   public String detail(@PathVariable("member_id") Long member_id,
                        Model model) {
+
     MemberDto member = memberService.memberDetail(member_id);
 
     if (member != null) {
       model.addAttribute("member", member);
-      return "member/detail";
+
+      return "member/memberDetail";
     } else {
       // 조회 회원이 없다.
       return "redirect:member/memberList";

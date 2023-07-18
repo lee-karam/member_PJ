@@ -5,7 +5,7 @@
 .container{
   width: 100%;
 }
-.container .join{
+.container .memberList{
   width: 100%;
   height: auto;
   display: flex;
@@ -13,11 +13,24 @@
 }
 .container .memberList .memberList-con{
   flex-basis: 1600px;
-  height: calc( 100vh - 64px - 200px - 30px);
+  min-height: 400px;
   background-color: antiquewhite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding:50px 0;
+}
+.container .memberList .memberList-con h1{
+    text-align:center;
+}
+.container .memberList .memberList-con table{
+  width:1200px;
+  margin:0 auto;
+}
+table, tr,td{
+    border-collapse: collapse;
+    border:1px solid #cccc;
+}
+.container .memberList .memberList-con table th,td{
+  height:30px;
+  text-align:center;
 }
 
 
