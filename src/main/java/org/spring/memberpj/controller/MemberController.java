@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -48,9 +50,7 @@ public class MemberController {
       // 회원목록페이지로 이동
       return "redirect:member/memberList";
     }
-
   }
-
 
   // 회원수정  // id,name,email,phone
   @PostMapping("/update")
@@ -72,7 +72,6 @@ public class MemberController {
   @GetMapping("/detail/{member_id}")  // detail/1
   public String detail(@PathVariable("member_id") Long member_id,
                        Model model) {
-
     MemberDto member = memberService.memberDetail(member_id);
 
     if (member != null) {
@@ -82,8 +81,36 @@ public class MemberController {
       // 조회 회원이 없다.
       return "redirect:member/memberList";
     }
+  }
 
+  @GetMapping("/memberList")
+  public String memberList(Model model) {
 
+    // 회원목록
+    List<MemberDto> memberList = memberService.memberListDo();
+
+    if (!memberList.isEmpty()) {
+      // 조회 할 목록 있으면
+      model.addAttribute("memberList", memberList);
+      return "member/memberList";
+    }
+
+    return "member/memberList";
+  }
+
+  // 회원탈퇴
+  @GetMapping("/delete/{member_id}")
+  public String delete(@PathVariable("member_id") Long member_id) {
+
+    int rs = memberService.memberDelete(member_id);
+
+    if (rs != 1) {
+      System.out.println("회원삭제 실패");
+    } else {
+      System.out.println("회원삭제 성공");
+    }
+
+    return "redirect:member/memberList";
   }
 
 

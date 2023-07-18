@@ -26,8 +26,8 @@ public class MemberTest {
   void insertTest() {
 
     MemberDto memberDto = new MemberDto();
-    memberDto.setName("m2");
-    memberDto.setEmail("m2@gami.com");
+    memberDto.setName("m3");
+    memberDto.setEmail("m3@gami.com");
     memberDto.setPhone("01000000000");
 
     MemberEntity memberEntity
@@ -93,24 +93,42 @@ public class MemberTest {
 
     List<MemberDto> memberDtoList = new ArrayList<>();
 
-    List<MemberEntity> memberEntityList
-            = memberRepository.findAll();
-    // List Entity -> Dto 변환
-    for (MemberEntity memberEntity : memberEntityList) {
-      MemberDto memberDto = MemberDto.toMemberDto(memberEntity);
-      memberDtoList.add(memberDto);
-    }
-    System.out.println("회원목록");
-    for (MemberDto memberDto : memberDtoList) {
-      System.out.print("id:" + memberDto.getId());
-      System.out.print("name: " + memberDto.getName());
-      System.out.print("phone: " + memberDto.getPhone());
-      System.out.print("email: " + memberDto.getEmail());
-      System.out.println("가입날짜: " + memberDto.getCreateDateTime());
-    }
+    List<MemberEntity> memberEntityList= memberRepository.findAll();
 
+    if(!memberEntityList.isEmpty()){
+      // List Entity -> Dto 변환
+      for (MemberEntity memberEntity : memberEntityList) {
+        MemberDto memberDto = MemberDto.toMemberDto(memberEntity);
+        memberDtoList.add(memberDto);
+      }
+      System.out.println("회원목록");
+      for (MemberDto memberDto : memberDtoList) {
+        System.out.print("id:" + memberDto.getId());
+        System.out.print("name: " + memberDto.getName());
+        System.out.print("phone: " + memberDto.getPhone());
+        System.out.print("email: " + memberDto.getEmail());
+        System.out.println("가입날짜: " + memberDto.getCreateDateTime());
+      }
+    }else {
+        System.out.println("조회할 회원이 없다.");
+    }
+  }
+
+  @Test
+  void deleteTest(){
+  // 회원삭제
+    //memberRepository.delete(Entity); // 자동으로  id체크 후에 있으면 삭제
+     MemberEntity memberEntity= MemberEntity.builder()
+            .id(3L)
+            .build();
+
+// memberRepository.delete(memberEntity);
+
+//    memberRepository.deleteById(4L);
 
   }
+
+
 
 
 }

@@ -1,0 +1,21 @@
+@import url(common/reset.css);
+@import url(common/header.css);
+@import url(common/footer.css);
+
+.container{
+  width: 100%;
+}
+.container .index{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.container .index .index-con{
+  flex-basis: 1600px;
+  height: calc( 100vh - 64px - 200px - 30px);
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

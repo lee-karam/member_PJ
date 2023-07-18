@@ -1,0 +1,18 @@
+.footer{
+   width: 100%;
+  height: auto;
+  /* border: 1px solid; */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+.footer .fcon{
+  flex-basis: 1400px;
+  /* border: 1px solid; */
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 200px;
+  background-color: #222222;
+  color:#ffffff
+}

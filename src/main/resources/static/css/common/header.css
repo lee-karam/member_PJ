@@ -1,0 +1,46 @@
+.header{
+  width: 100%;
+  height: auto;
+  border: 1px solid;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 10px;
+}
+
+.header .nav{
+  flex-basis: 1400px;
+  border: 1px solid;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.header .nav h1.logo{
+  flex-basis: 120px;
+  height: auto;
+}
+.header .nav h1.logo img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.header .nav  .gnb{
+  width: auto;
+  height: auto;
+}
+.header .nav .gnb>ul{
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 10px 0;
+}
+.header .nav  .gnb>ul>li{
+  background-color: black;
+  color: #ffffff;
+}
+.header .nav  .gnb>ul>li >a{
+  line-height: 40px;
+  background-color: inherit;
+  color: inherit;
+  padding:  0 10px;
+}

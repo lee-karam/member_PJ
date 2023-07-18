@@ -28,7 +28,7 @@ public class MemberDto {
 
   //  Entity -> Dto
 
-  // 1. 회원목록조히
+  // 1. 회원목록조회
 
   // 2. 회원 상세 조회
   public  static MemberDto toMemberDto(MemberEntity memberEntity){

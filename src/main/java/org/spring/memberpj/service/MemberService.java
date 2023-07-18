@@ -7,6 +7,8 @@ import org.spring.memberpj.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +39,7 @@ public class MemberService {
   }
 
 
+  //회원수정
   @Transactional
   public int memberUpdate(MemberDto memberDto) {
     //Dto -> Entity
@@ -57,17 +60,64 @@ public class MemberService {
     }
   }
 
+  // 회원상세정보
   public MemberDto memberDetail(Long memberId) {
-    MemberDto memberDto=null;
+    MemberDto memberDto = null;
 
     Optional<MemberEntity> memberEntityOptional
-            =  memberRepository.findById(memberId);
-    if(memberEntityOptional.isPresent()){
+            = memberRepository.findById(memberId);
+    if (memberEntityOptional.isPresent()) {
       System.out.println("회원존재 합니다.");
-        memberDto= MemberDto.toMemberDto(memberEntityOptional.get());
-    }else{
+      memberDto = MemberDto.toMemberDto(memberEntityOptional.get());
+    } else {
       System.out.println("회원존재 하지 않습니다.");
     }
     return memberDto;
+  }
+
+
+  // 전체회원목록 조회
+  public List<MemberDto> memberListDo() {
+
+    List<MemberDto> memberDtoList = new ArrayList<>();
+    List<MemberEntity> memberEntityList = memberRepository.findAll();
+
+    if(!memberEntityList.isEmpty()){  // 조회할 회원목록 O
+      for (MemberEntity memberEntity : memberEntityList) {
+        // Build
+/*      MemberDto memberDto = MemberDto.builder()
+                            .id(memberEntity.getId())
+                            .name(memberEntity.getName())
+                            .phone(memberEntity.getPhone())
+                            .email(memberEntity.getEmail())
+                            .createDateTime(memberEntity.getCreateDateTime())
+                            .build();*/
+        //Entity-> Dto
+        MemberDto memberDto = MemberDto.toMemberDto(memberEntity);
+        //Entity-> Dto -> List<Dto>
+        memberDtoList.add(memberDto);
+      }
+    }
+    return memberDtoList;
+
+  }
+
+
+  @Transactional
+  public int memberDelete(Long memberId) {
+    MemberEntity memberEntity= MemberEntity.builder()
+            .id(memberId)
+            .build();
+    memberRepository.delete(memberEntity);
+    Optional<MemberEntity> memberEntityOptional
+            = memberRepository.findById(memberEntity.getId());
+    if(!memberEntityOptional.isPresent()){
+      System.out.println("회원삭제 성공");
+      return 1;
+    }
+    return 0;
+//    memberRepository.findById(memberEntity.getId())
+//    memberRepository.deleteById(memberEntity.getId());
+
   }
 }
